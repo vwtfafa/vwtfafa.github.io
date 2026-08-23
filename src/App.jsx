@@ -8,6 +8,8 @@ import Projects from "./components/Projects"
 import Releases from "./components/Releases"
 import Metrics from "./components/Metrics"
 import Contact from "./components/Footer"
+import BackToTop from "./components/BackToTop"
+import EasterEggs from "./components/EasterEggs"
 
 export default function App() {
   return (
@@ -36,6 +38,8 @@ export default function App() {
           <Metrics />
           <Contact />
         </main>
+        <BackToTop />
+        <EasterEggs />
       </LanguageProvider>
     </ThemeProvider>
   )

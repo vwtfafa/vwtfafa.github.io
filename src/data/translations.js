@@ -132,6 +132,12 @@ export const translations = {
       discordCopied: "Discord-Name kopiert! ✓",
       copyHint: "Klicken zum Kopieren",
     },
+    backToTop: {
+      label: "Nach oben",
+    },
+    eggs: {
+      creeper: "Ach nee… CREEPER! 💥 Easter Egg gefunden!",
+    },
   },
   en: {
     nav: {
@@ -265,6 +271,12 @@ export const translations = {
       discord: "Discord",
       discordCopied: "Discord name copied! ✓",
       copyHint: "Click to copy",
+    },
+    backToTop: {
+      label: "Back to top",
+    },
+    eggs: {
+      creeper: "Aw man… CREEPER! 💥 Easter egg found!",
     },
   },
 }

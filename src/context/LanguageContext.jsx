@@ -1,10 +1,21 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { translations } from "../data/translations"
 
 const LanguageContext = createContext(null)
 
+function getInitialLang() {
+  if (typeof window === "undefined") return "en"
+  const stored = localStorage.getItem("lang")
+  return stored === "de" ? "de" : "en"
+}
+
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState("de")
+  const [lang, setLang] = useState(getInitialLang)
+
+  useEffect(() => {
+    localStorage.setItem("lang", lang)
+    document.documentElement.lang = lang
+  }, [lang])
 
   const t = (path) => {
     const keys = path.split(".")

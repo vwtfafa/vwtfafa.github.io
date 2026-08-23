@@ -1,5 +1,11 @@
+import { useRef, useState } from "react"
 import { useLanguage } from "../context/LanguageContext"
 import { useTheme } from "../context/ThemeContext"
+import { useScrollSpy } from "../hooks/useScrollSpy"
+import { translations } from "../data/translations"
+
+const NAV_IDS = Object.keys(translations.de.nav)
+const LOGO_CLICKS_NEEDED = 5
 
 export default function Header() {
   const { lang, toggleLang } = useLanguage()
@@ -7,10 +13,7 @@ export default function Header() {
 
   return (
     <header className="header">
-      <a href="#top" className="logo">
-        <span className="logo-block"></span>
-        vwtfafa
-      </a>
+      <Logo />
       <nav className="nav">
         <NavLinks />
         <button
@@ -34,14 +37,49 @@ export default function Header() {
   )
 }
 
-import { translations } from "../data/translations"
+function Logo() {
+  const [spinning, setSpinning] = useState(false)
+  const clicks = useRef(0)
+  const resetTimer = useRef(null)
+
+  const handleClick = () => {
+    if (spinning) return
+    clearTimeout(resetTimer.current)
+    clicks.current += 1
+    if (clicks.current >= LOGO_CLICKS_NEEDED) {
+      clicks.current = 0
+      setSpinning(true)
+      setTimeout(() => setSpinning(false), 1200)
+      return
+    }
+    resetTimer.current = setTimeout(() => {
+      clicks.current = 0
+    }, 1500)
+  }
+
+  return (
+    <a href="#top" className="logo" onClick={handleClick}>
+      <span
+        className={`logo-block${spinning ? " logo-spin" : ""}`}
+        aria-hidden="true"
+      />
+      vwtfafa
+    </a>
+  )
+}
 
 function NavLinks() {
   const { lang } = useLanguage()
+  const activeId = useScrollSpy(NAV_IDS)
   return (
     <>
-      {Object.keys(translations[lang].nav).map((key) => (
-        <a key={key} href={`#${key}`} className="nav-link">
+      {NAV_IDS.map((key) => (
+        <a
+          key={key}
+          href={`#${key}`}
+          className={`nav-link${activeId === key ? " nav-link-active" : ""}`}
+          aria-current={activeId === key ? "true" : undefined}
+        >
           {translations[lang].nav[key]}
         </a>
       ))}
