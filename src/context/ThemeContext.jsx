@@ -5,7 +5,10 @@ const ThemeContext = createContext(null)
 function getInitialTheme() {
   if (typeof window === "undefined") return "dark"
   const stored = localStorage.getItem("theme")
-  return stored === "light" ? "light" : "dark"
+  if (stored === "light" || stored === "dark") return stored
+  return window.matchMedia?.("(prefers-color-scheme: light)").matches
+    ? "light"
+    : "dark"
 }
 
 export function ThemeProvider({ children }) {

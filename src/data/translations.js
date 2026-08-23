@@ -3,6 +3,7 @@ export const translations = {
     nav: {
       projects: "Projekte",
       about: "Über mich",
+      faq: "FAQ",
       contact: "Kontakt",
     },
     hero: {
@@ -41,6 +42,7 @@ export const translations = {
       discontinued: "Nicht mehr aktualisiert",
       new: "NEU",
       commandsToggle: "Commands & Features",
+      filterAll: "Alle",
       links: {
         modrinth: "Modrinth",
         github: "GitHub",
@@ -138,11 +140,38 @@ export const translations = {
     eggs: {
       creeper: "Ach nee… CREEPER! 💥 Easter Egg gefunden!",
     },
+    faq: {
+      title: "FAQ",
+      subtitle: "Häufige Fragen – kurz beantwortet",
+      items: [
+        {
+          q: "Wie kann ich dich erreichen?",
+          a: "Am schnellsten per Discord (vwtfafa) – einfach den Namen in der Kontakt-Sektion kopieren. Oder über GitHub Issues in einem meiner Repos.",
+        },
+        {
+          q: "Darf ich deine Plugins auf meinem Server nutzen?",
+          a: "Ja! Alle Projekte sind open source. Die genauen Lizenzbedingungen findest du jeweils im GitHub-Repo bzw. auf Modrinth.",
+        },
+        {
+          q: "Nimmst du Feature-Wünsche oder Bug-Reports an?",
+          a: "Auf jeden Fall – Issues auf GitHub sind der beste Weg. Je konkreter die Beschreibung (Version, Schritte, Logs), desto schneller kann ich helfen.",
+        },
+        {
+          q: "Welche Minecraft-Versionen werden unterstützt?",
+          a: "Die aktiven Paper/Bukkit-Plugins unterstützen aktuelle Paper-Versionen inklusive Folia. Details stehen immer auf der Modrinth-Seite des jeweiligen Projekts.",
+        },
+        {
+          q: "Kann ich bei deinen Projekten mitmachen?",
+          a: "Pull Requests sind willkommen! Fork das Repo, ändere was und öffne einen PR – ich schaue mir alles an.",
+        },
+      ],
+    },
   },
   en: {
     nav: {
       projects: "Projects",
       about: "About",
+      faq: "FAQ",
       contact: "Contact",
     },
     hero: {
@@ -181,6 +210,7 @@ export const translations = {
       discontinued: "Discontinued",
       new: "NEW",
       commandsToggle: "Commands & Features",
+      filterAll: "All",
       links: {
         modrinth: "Modrinth",
         github: "GitHub",
@@ -277,6 +307,32 @@ export const translations = {
     },
     eggs: {
       creeper: "Aw man… CREEPER! 💥 Easter egg found!",
+    },
+    faq: {
+      title: "FAQ",
+      subtitle: "Frequently asked questions – short and sweet",
+      items: [
+        {
+          q: "How can I reach you?",
+          a: "Fastest way is Discord (vwtfafa) – copy the name from the contact section. Or open an issue on GitHub in one of my repos.",
+        },
+        {
+          q: "Can I use your plugins on my server?",
+          a: "Yes! All projects are open source. Check the exact license terms in the GitHub repo or on Modrinth.",
+        },
+        {
+          q: "Do you take feature requests or bug reports?",
+          a: "Absolutely – GitHub issues are the best way. The more concrete the report (version, steps, logs), the faster I can help.",
+        },
+        {
+          q: "Which Minecraft versions are supported?",
+          a: "The active Paper/Bukkit plugins support current Paper versions including Folia. Details are always on each project's Modrinth page.",
+        },
+        {
+          q: "Can I contribute to your projects?",
+          a: "Pull requests are welcome! Fork the repo, make your changes and open a PR – I'll review everything.",
+        },
+      ],
     },
   },
 }

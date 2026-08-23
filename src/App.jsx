@@ -7,6 +7,7 @@ import About from "./components/About"
 import Projects from "./components/Projects"
 import Releases from "./components/Releases"
 import Metrics from "./components/Metrics"
+import Faq from "./components/Faq"
 import Contact from "./components/Footer"
 import BackToTop from "./components/BackToTop"
 import EasterEggs from "./components/EasterEggs"
@@ -36,6 +37,7 @@ export default function App() {
           <Projects />
           <Releases />
           <Metrics />
+          <Faq />
           <Contact />
         </main>
         <BackToTop />

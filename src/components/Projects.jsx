@@ -1,10 +1,17 @@
 import { useState } from "react"
 import { useLanguage } from "../context/LanguageContext"
 import { projects } from "../data/projects"
-import { useModrinth, formatDownloads } from "../hooks/useModrinth"
+import { useModrinth, formatDownloads, timeAgo } from "../hooks/useModrinth"
+import { useGithub } from "../hooks/useGithub"
 import Reveal from "./Reveal"
 
-function ProjectCard({ project, index, modrinth, t }) {
+function repoSlug(githubUrl) {
+  return githubUrl
+    .replace("https://github.com/", "")
+    .replace(/\/$/, "")
+}
+
+function ProjectCard({ project, index, modrinth, gh, t, lang }) {
   const [openCommands, setOpenCommands] = useState(false)
   const live = modrinth?.map[project.modrinthId]
   const downloads = live
@@ -12,6 +19,7 @@ function ProjectCard({ project, index, modrinth, t }) {
     : project.downloads
 
   const commands = t(`projects.items.${project.id}.commands`)
+  const ghStats = project.github ? gh?.[repoSlug(project.github)] : null
 
   return (
     <Reveal delay={index * 60}>
@@ -75,6 +83,17 @@ function ProjectCard({ project, index, modrinth, t }) {
             </span>
           ))}
         </div>
+        {ghStats && (
+          <p className="project-meta">
+            ⭐ {ghStats.stars}
+            {ghStats.pushedAt && (
+              <>
+                {" · "}
+                {timeAgo(ghStats.pushedAt, lang)}
+              </>
+            )}
+          </p>
+        )}
         <div className="project-links">
           {project.modrinth && (
             <a
@@ -103,21 +122,48 @@ function ProjectCard({ project, index, modrinth, t }) {
 }
 
 export default function Projects() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const modrinth = useModrinth()
+  const gh = useGithub()
+  const [filter, setFilter] = useState("all")
+
+  const allTags = [...new Set(projects.flatMap((p) => p.tags))]
+  const visible =
+    filter === "all"
+      ? projects
+      : projects.filter((p) => p.tags.includes(filter))
 
   return (
     <section className="projects" id="projects">
       <h2 className="section-title">{t("projects.title")}</h2>
       <p className="section-subtitle">{t("projects.subtitle")}</p>
+      <div className="project-filters" role="group" aria-label={t("projects.title")}>
+        <button
+          className={`filter-chip${filter === "all" ? " filter-chip-active" : ""}`}
+          onClick={() => setFilter("all")}
+        >
+          {t("projects.filterAll")}
+        </button>
+        {allTags.map((tag) => (
+          <button
+            key={tag}
+            className={`filter-chip${filter === tag ? " filter-chip-active" : ""}`}
+            onClick={() => setFilter(tag)}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
       <div className="project-grid">
-        {projects.map((project, i) => (
+        {visible.map((project, i) => (
           <ProjectCard
             key={project.id}
             project={project}
             index={i}
             modrinth={modrinth}
+            gh={gh}
             t={t}
+            lang={lang}
           />
         ))}
       </div>
