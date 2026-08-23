@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vwtfafa.github.io/sitemap.xml

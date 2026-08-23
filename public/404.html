@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="https://mc-heads.net/avatar/vwtfafa/64"
+      type="image/png"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 – Seite nicht gefunden | vwtfafa</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        background: #0b0f0c;
+        color: #e8f0e9;
+        font-family:
+          "Silkscreen", system-ui, sans-serif;
+        text-align: center;
+        padding: 2rem;
+        overflow-x: hidden;
+      }
+
+      .creeper {
+        width: 96px;
+        height: 96px;
+        image-rendering: pixelated;
+        animation: float 3s ease-in-out infinite;
+        filter: drop-shadow(0 0 30px rgba(74, 222, 91, 0.35));
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-14px);
+        }
+      }
+
+      h1 {
+        font-size: clamp(3rem, 12vw, 6rem);
+        color: #4ade5b;
+        text-shadow: 5px 5px 0 rgba(34, 192, 50, 0.25);
+      }
+
+      p {
+        font-size: 1rem;
+        color: #8fa396;
+        max-width: 480px;
+        line-height: 1.8;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 0.5rem;
+        padding: 0.85rem 2rem;
+        background: #4ade5b;
+        color: #06130a;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        border-radius: 4px;
+        box-shadow: 4px 4px 0 rgba(34, 192, 50, 0.4);
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+
+      .btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 rgba(34, 192, 50, 0.5);
+      }
+
+      .particle {
+        position: fixed;
+        bottom: -20px;
+        width: 8px;
+        height: 8px;
+        background: #4ade5b;
+        opacity: 0;
+        animation: float-up linear infinite;
+      }
+
+      .particle:nth-child(3n) {
+        background: #22c032;
+      }
+
+      @keyframes float-up {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateY(-110vh) rotate(180deg);
+          opacity: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .creeper,
+        .particle {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <span class="particle" style="left: 10%; animation-duration: 11s"></span>
+    <span class="particle" style="left: 25%; animation-delay: 3s; animation-duration: 13s"></span>
+    <span class="particle" style="left: 40%; animation-delay: 6s; animation-duration: 9s"></span>
+    <span class="particle" style="left: 55%; animation-delay: 1s; animation-duration: 12s"></span>
+    <span class="particle" style="left: 70%; animation-delay: 8s; animation-duration: 10s"></span>
+    <span class="particle" style="left: 85%; animation-delay: 4s; animation-duration: 14s"></span>
+
+    <img
+      class="creeper"
+      src="https://mc-heads.net/avatar/vwtfafa/128"
+      alt=""
+    />
+    <h1>404</h1>
+    <p>
+      Diese Seite wurde von einem Creeper weggesprengt...<br />
+      This page got blown up by a creeper...
+    </p>
+    <a class="btn" href="/">Zurück zur Startseite / Back Home</a>
+  </body>
+</html>

@@ -125,6 +125,13 @@ export const translations = {
       madeWith: "Erstellt mit React",
       rights: "© 2026 vwtfafa",
     },
+    contact: {
+      title: "Kontakt",
+      subtitle: "Fragen, Feedback oder Lust auf Collaboration? Schreib mir!",
+      discord: "Discord",
+      discordCopied: "Discord-Name kopiert! ✓",
+      copyHint: "Klicken zum Kopieren",
+    },
   },
   en: {
     nav: {
@@ -251,6 +258,13 @@ export const translations = {
     footer: {
       madeWith: "Built with React",
       rights: "© 2026 vwtfafa",
+    },
+    contact: {
+      title: "Contact",
+      subtitle: "Questions, feedback or want to collaborate? Hit me up!",
+      discord: "Discord",
+      discordCopied: "Discord name copied! ✓",
+      copyHint: "Click to copy",
     },
   },
 }

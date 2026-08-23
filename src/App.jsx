@@ -7,7 +7,7 @@ import About from "./components/About"
 import Projects from "./components/Projects"
 import Releases from "./components/Releases"
 import Metrics from "./components/Metrics"
-import Footer from "./components/Footer"
+import Contact from "./components/Footer"
 
 export default function App() {
   return (
@@ -34,8 +34,8 @@ export default function App() {
           <Projects />
           <Releases />
           <Metrics />
+          <Contact />
         </main>
-        <Footer />
       </LanguageProvider>
     </ThemeProvider>
   )
