@@ -17,6 +17,7 @@ export const translations = {
       projects: "Projekte",
       downloads: "Downloads",
       years: "Jahre aktiv",
+      servers: "Server online",
     },
     about: {
       title: "Über mich",
@@ -143,6 +144,7 @@ export const translations = {
       projects: "Projects",
       downloads: "Downloads",
       years: "Years active",
+      servers: "Servers online",
     },
     about: {
       title: "About Me",
