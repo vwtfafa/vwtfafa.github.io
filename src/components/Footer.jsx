@@ -94,11 +94,16 @@ function VisitorCounter() {
   if (visits === null) return null
 
   return (
-    <p className="visitor-counter">
-      👀{" "}
-      {lang === "de"
-        ? `${visits.toLocaleString("de-DE")} Besucher`
-        : `${visits.toLocaleString("en-US")} visitors`}
-    </p>
+    <div className="visitor-counter">
+      <span className="visitor-number">
+        {visits.toLocaleString(lang === "de" ? "de-DE" : "en-US")}
+      </span>
+      <span className="visitor-label">
+        👀{" "}
+        {lang === "de"
+          ? "Besucher auf dieser Seite"
+          : "visitors on this site"}
+      </span>
+    </div>
   )
 }
