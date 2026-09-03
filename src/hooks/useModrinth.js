@@ -3,13 +3,29 @@ import { projects } from "../data/projects"
 
 const modrinthProjects = projects.filter((p) => p.modrinthId)
 
-let cache = null
+const CACHE_KEY = 'modrinthCache'
+const CACHE_TTL = 60 * 60 * 1000 // 1 hour
+
+function getCached() {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY)
+    if (!raw) return null
+    const { data, timestamp } = JSON.parse(raw)
+    if (Date.now() - timestamp < CACHE_TTL) return data
+  } catch (e) {}
+  return null
+}
+
+function setCached(data) {
+  const payload = { data, timestamp: Date.now() }
+  localStorage.setItem(CACHE_KEY, JSON.stringify(payload))
+}
 
 export function useModrinth() {
-  const [data, setData] = useState(cache)
+  const [data, setData] = useState(getCached())
 
   useEffect(() => {
-    if (cache) return
+    if (data) return // already cached and valid
     let cancelled = false
     Promise.all(
       modrinthProjects.map(async (project) => {
@@ -30,18 +46,22 @@ export function useModrinth() {
               iconUrl: meta.icon_url,
               latestVersion: versions[0]?.version_number ?? null,
               latestDate: versions[0]?.date_published ?? null,
+              changelog: versions[0]?.changelog ?? null,
+              gallery: Array.isArray(meta.gallery) ? meta.gallery : [],
+              versionCount: versions.length,
             },
           ]
         } catch {
           return [project.modrinthId, null]
         }
       }),
-    ).then(async (entries) => {
+    ).then((entries) => {
       let totalDownloads = 0
       for (const [, value] of entries) {
         totalDownloads += value?.downloads ?? 0
       }
-      cache = { map: Object.fromEntries(entries), totalDownloads }
+      const cache = { map: Object.fromEntries(entries), totalDownloads }
+      setCached(cache)
       if (!cancelled) setData(cache)
     })
     return () => {

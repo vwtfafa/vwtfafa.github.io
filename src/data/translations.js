@@ -3,6 +3,8 @@ export const translations = {
     nav: {
       projects: "Projekte",
       about: "Über mich",
+      metrics: "Metriken",
+      releases: "Updates",
       faq: "FAQ",
       contact: "Kontakt",
     },
@@ -25,6 +27,15 @@ export const translations = {
       subtitle:
         "Ich entwickle seit 3 Jahren Minecraft-Plugins und -Modpacks – von kleinen Utility-Tools bis zu kompletten Modpacks.",
       skillsTitle: "Tech-Stack & Skills",
+      stars: "GitHub Sterne",
+      language: "Top-Sprache",
+      timelineTitle: "Werdegang",
+      timeline: [
+        { year: "2023", text: "Erste Schritte mit Java & Bukkit API – Prototypen und kleine Utility-Plugins." },
+        { year: "2024", text: "Lock End, CompassTrack & HitBorder veröffentlicht – erste Server nutzen bStats-Daten live." },
+        { year: "2025", text: "Simple Backpack & Craft Attack Modpack – über 10K Downloads geknackt." },
+        { year: "2026", text: "QuickTrash, Folia-Support & Fokus auf Performance, Doku und saubere Releases." },
+      ],
       skills: [
         "Java",
         "Paper / Bukkit API",
@@ -126,6 +137,7 @@ export const translations = {
     footer: {
       madeWith: "Erstellt mit React",
       rights: "© 2026 vwtfafa",
+      legal: "Privates Non-Profit-Projekt · Kontakt via Discord / GitHub · Keine Cookies, keine Tracker",
     },
     contact: {
       title: "Kontakt",
@@ -133,6 +145,41 @@ export const translations = {
       discord: "Discord",
       discordCopied: "Discord-Name kopiert! ✓",
       copyHint: "Klicken zum Kopieren",
+      form: {
+        name: "Dein Name",
+        email: "Deine E-Mail",
+        message: "Deine Nachricht…",
+        send: "Via GitHub senden",
+        subject: "Kontakt über Website",
+        sent: "✓ Öffnet GitHub Issues mit deiner Nachricht – danke!",
+      },
+    },
+    showcase: {
+      title: "Einsatzbeispiele",
+      subtitle: "So werden meine Plugins auf Servern genutzt",
+      items: [
+        { title: "CityBuild & Events", text: "Mit Lock End das End für Events sperren oder gezielt freigeben – ohne Restarts, mit Bypass-Permission fürs Team.", meta: "Lock End · Paper & Folia" },
+        { title: "Manhunt & PvP", text: "Mit CompassTrack Ziele live tracken – ideal für Manhunts mit Cooldowns und fairen Permissions.", meta: "CompassTrack · Paper / Purpur" },
+        { title: "Challenges & Content", text: "Mit HitBorder wächst die Border bei jedem Hit – perfekt für YouTube-Challenges mit Hardcore-Modus.", meta: "HitBorder · Paper" },
+      ],
+    },
+    guides: {
+      title: "Schnellstart",
+      subtitle: "In 3 Schritten auf deinem Server",
+      steps: [
+        { title: "Installieren", text: "Plugin von Modrinth laden und in den plugins-Ordner legen, Server neu starten.", code: "plugins/Lock-End.jar" },
+        { title: "Konfigurieren", text: "Config anpassen und live neu laden – kein Restart nötig.", code: "/lockend reload" },
+        { title: "Support", text: "Fragen oder Bugs? Discord-Name kopieren oder GitHub Issue mit Version + Log öffnen.", code: "vwtfafa auf Discord" },
+      ],
+    },
+    support: {
+      title: "Supporten",
+      subtitle: "Kostenlos helfen – dauert keine Minute",
+      items: [
+        { title: "⭐ Stern geben", text: "Gib meinen Repos einen Stern – das hilft am meisten.", link: "https://github.com/vwtfafa" },
+        { title: "⬇ Downloaden", text: "Lade über Modrinth und folge mir für Update-Benachrichtigungen.", link: "https://modrinth.com/user/vwtfafa" },
+        { title: "🐛 Feedback", text: "Bug gefunden? Issue mit Version, Schritten und Log öffnen.", link: "https://github.com/vwtfafa/vwtfafa.github.io/issues" },
+      ],
     },
     backToTop: {
       label: "Nach oben",
@@ -164,6 +211,10 @@ export const translations = {
           q: "Kann ich bei deinen Projekten mitmachen?",
           a: "Pull Requests sind willkommen! Fork das Repo, ändere was und öffne einen PR – ich schaue mir alles an.",
         },
+        {
+          q: "Sammelt die Website Daten?",
+          a: "Nein – keine Cookies, keine Tracker. Nur öffentliche Modrinth-, bStats- und GitHub-APIs für Downloads und Serverzahlen, plus localStorage für Theme und Sprache.",
+        },
       ],
     },
   },
@@ -171,6 +222,8 @@ export const translations = {
     nav: {
       projects: "Projects",
       about: "About",
+      metrics: "Metrics",
+      releases: "Updates",
       faq: "FAQ",
       contact: "Contact",
     },
@@ -193,6 +246,15 @@ export const translations = {
       subtitle:
         "I've been building Minecraft plugins and modpacks for 3 years – from small utility tools to complete modpacks.",
       skillsTitle: "Tech Stack & Skills",
+      stars: "GitHub stars",
+      language: "Top language",
+      timelineTitle: "Journey",
+      timeline: [
+        { year: "2023", text: "First steps with Java & Bukkit API – prototypes and small utility plugins." },
+        { year: "2024", text: "Released Lock End, CompassTrack & HitBorder – first servers reporting live bStats data." },
+        { year: "2025", text: "Simple Backpack & Craft Attack modpack – passed 10K downloads." },
+        { year: "2026", text: "QuickTrash, Folia support & focus on performance, docs and clean releases." },
+      ],
       skills: [
         "Java",
         "Paper / Bukkit API",
@@ -294,6 +356,7 @@ export const translations = {
     footer: {
       madeWith: "Built with React",
       rights: "© 2026 vwtfafa",
+      legal: "Private non-profit project · Contact via Discord / GitHub · No cookies, no trackers",
     },
     contact: {
       title: "Contact",
@@ -301,6 +364,41 @@ export const translations = {
       discord: "Discord",
       discordCopied: "Discord name copied! ✓",
       copyHint: "Click to copy",
+      form: {
+        name: "Your name",
+        email: "Your email",
+        message: "Your message…",
+        send: "Send via GitHub",
+        subject: "Contact via website",
+        sent: "✓ Opening GitHub Issues with your message – thanks!",
+      },
+    },
+    showcase: {
+      title: "Use cases",
+      subtitle: "How servers use my plugins",
+      items: [
+        { title: "CityBuild & Events", text: "Lock or unlock the End for events with Lock End – no restarts, with bypass permission for staff.", meta: "Lock End · Paper & Folia" },
+        { title: "Manhunt & PvP", text: "Track targets live with CompassTrack – perfect for manhunts with cooldowns and fair permissions.", meta: "CompassTrack · Paper / Purpur" },
+        { title: "Challenges & Content", text: "HitBorder grows the border on every hit – great for YouTube challenges with hardcore mode.", meta: "HitBorder · Paper" },
+      ],
+    },
+    guides: {
+      title: "Quickstart",
+      subtitle: "On your server in 3 steps",
+      steps: [
+        { title: "Install", text: "Download the plugin from Modrinth, drop it into the plugins folder, restart.", code: "plugins/Lock-End.jar" },
+        { title: "Configure", text: "Tweak the config and reload live – no restart needed.", code: "/lockend reload" },
+        { title: "Support", text: "Questions or bugs? Copy my Discord name or open a GitHub issue with version + log.", code: "vwtfafa on Discord" },
+      ],
+    },
+    support: {
+      title: "Support",
+      subtitle: "Help for free – takes less than a minute",
+      items: [
+        { title: "⭐ Star", text: "Star my repos – that helps the most.", link: "https://github.com/vwtfafa" },
+        { title: "⬇ Download", text: "Download via Modrinth and follow me for update notifications.", link: "https://modrinth.com/user/vwtfafa" },
+        { title: "🐛 Feedback", text: "Found a bug? Open an issue with version, steps and log.", link: "https://github.com/vwtfafa/vwtfafa.github.io/issues" },
+      ],
     },
     backToTop: {
       label: "Back to top",
@@ -331,6 +429,10 @@ export const translations = {
         {
           q: "Can I contribute to your projects?",
           a: "Pull requests are welcome! Fork the repo, make your changes and open a PR – I'll review everything.",
+        },
+        {
+          q: "Does the website collect data?",
+          a: "No – no cookies, no trackers. Only public Modrinth, bStats and GitHub APIs for downloads and server counts, plus localStorage for theme and language.",
         },
       ],
     },

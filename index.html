@@ -2,6 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      try {
+        var s = localStorage.getItem("lang");
+        var l = s === "de" || s === "en" ? s : (navigator.language || "en").toLowerCase().startsWith("de") ? "de" : "en";
+        document.documentElement.lang = l;
+      } catch (e) {}
+    </script>
     <link
       rel="icon"
       href="https://mc-heads.net/avatar/vwtfafa/64"
@@ -41,6 +48,38 @@
     <title>vwtfafa – Minecraft Developer</title>
     <link rel="canonical" href="https://vwtfafa.github.io/" />
     <meta property="og:url" content="https://vwtfafa.github.io/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="vwtfafa" />
+    <meta name="theme-color" content="#0b0f0c" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "vwtfafa",
+        "url": "https://vwtfafa.github.io/",
+        "jobTitle": "Minecraft Developer",
+        "sameAs": [
+          "https://github.com/vwtfafa",
+          "https://modrinth.com/user/vwtfafa"
+        ],
+        "knowsAbout": [
+          "Minecraft Plugins",
+          "Paper API",
+          "Folia",
+          "Fabric",
+          "Java",
+          "Modpacks"
+        ],
+        "makesOffer": [
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Lock End" } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Simple Backpack" } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "CompassTrack" } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "HitBorder" } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "QuickTrash" } },
+          { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Craft Attack 13" } }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

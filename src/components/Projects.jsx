@@ -1,9 +1,11 @@
+import React from "react"
 import { useState } from "react"
 import { useLanguage } from "../context/LanguageContext"
 import { projects } from "../data/projects"
 import { useModrinth, formatDownloads, timeAgo } from "../hooks/useModrinth"
 import { useGithub } from "../hooks/useGithub"
 import Reveal from "./Reveal"
+import ProjectModal from "./ProjectModal"
 
 function repoSlug(githubUrl) {
   return githubUrl
@@ -11,8 +13,10 @@ function repoSlug(githubUrl) {
     .replace(/\/$/, "")
 }
 
-function ProjectCard({ project, index, modrinth, gh, t, lang }) {
+
+export const ProjectCard = React.memo(function ProjectCard({ project, index, modrinth, gh, t, lang, onSelect }) {
   const [openCommands, setOpenCommands] = useState(false)
+  const [copiedCmd, setCopiedCmd] = useState(null)
   const live = modrinth?.map[project.modrinthId]
   const downloads = live
     ? formatDownloads(live.downloads)
@@ -21,10 +25,37 @@ function ProjectCard({ project, index, modrinth, gh, t, lang }) {
   const commands = t(`projects.items.${project.id}.commands`)
   const ghStats = project.github ? gh?.[repoSlug(project.github)] : null
 
+  const copyCommand = async (e, cmd) => {
+    e.stopPropagation()
+    const code = cmd.split(" – ")[0].split(" - ")[0].trim()
+    try {
+      await navigator.clipboard.writeText(code)
+    } catch {
+      const el = document.createElement("textarea")
+      el.value = code
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand("copy")
+      document.body.removeChild(el)
+    }
+    setCopiedCmd(cmd)
+    setTimeout(() => setCopiedCmd(null), 1500)
+  }
+
   return (
     <Reveal delay={index * 60}>
       <article
         className={`project-card${project.discontinued ? " discontinued" : ""}`}
+        onClick={onSelect}
+        role="button"
+        tabIndex={0}
+        aria-label={t(`projects.items.${project.id}.name`)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault()
+            onSelect?.()
+          }
+        }}
       >
         {project.discontinued && (
           <span className="discontinued-badge">
@@ -38,7 +69,7 @@ function ProjectCard({ project, index, modrinth, gh, t, lang }) {
           {live?.iconUrl ? (
             <img
               src={live.iconUrl}
-              alt=""
+              alt={t(`projects.items.${project.id}.name`)}
               className="project-icon-img"
               loading="lazy"
             />
@@ -59,7 +90,10 @@ function ProjectCard({ project, index, modrinth, gh, t, lang }) {
           <div className="commands-wrap">
             <button
               className="commands-toggle"
-              onClick={() => setOpenCommands((o) => !o)}
+              onClick={(e) => {
+                e.stopPropagation()
+                setOpenCommands((o) => !o)
+              }}
               aria-expanded={openCommands}
             >
               <span className="commands-chevron">
@@ -70,7 +104,19 @@ function ProjectCard({ project, index, modrinth, gh, t, lang }) {
             {openCommands && (
               <ul className="commands-list">
                 {commands.map((cmd) => (
-                  <li key={cmd}>{cmd}</li>
+                  <li key={cmd} className="cmd-row">
+                    <span>{cmd}</span>
+                    {cmd.startsWith("/") && (
+                      <button
+                        className="cmd-copy"
+                        onClick={(e) => copyCommand(e, cmd)}
+                        aria-label={`Copy ${cmd}`}
+                        title="Copy command"
+                      >
+                        {copiedCmd === cmd ? "✓" : "⧉"}
+                      </button>
+                    )}
+                  </li>
                 ))}
               </ul>
             )}
@@ -101,6 +147,7 @@ function ProjectCard({ project, index, modrinth, gh, t, lang }) {
               target="_blank"
               rel="noopener noreferrer"
               className="project-link link-modrinth"
+              onClick={(e) => e.stopPropagation()}
             >
               {t("projects.links.modrinth")} ↗
             </a>
@@ -111,6 +158,7 @@ function ProjectCard({ project, index, modrinth, gh, t, lang }) {
               target="_blank"
               rel="noopener noreferrer"
               className="project-link link-github"
+              onClick={(e) => e.stopPropagation()}
             >
               {t("projects.links.github")} ↗
             </a>
@@ -119,13 +167,14 @@ function ProjectCard({ project, index, modrinth, gh, t, lang }) {
       </article>
     </Reveal>
   )
-}
+})
 
 export default function Projects() {
   const { t, lang } = useLanguage()
   const modrinth = useModrinth()
   const gh = useGithub()
   const [filter, setFilter] = useState("all")
+  const [selected, setSelected] = useState(null)
 
   const allTags = [...new Set(projects.flatMap((p) => p.tags))]
   const visible =
@@ -164,9 +213,19 @@ export default function Projects() {
             gh={gh}
             t={t}
             lang={lang}
+            onSelect={() => setSelected(project)}
           />
         ))}
       </div>
+
+      <ProjectModal
+        project={selected}
+        live={selected ? modrinth?.map[selected.modrinthId] : null}
+        ghStats={
+          selected?.github ? gh?.[repoSlug(selected.github)] : null
+        }
+        onClose={() => setSelected(null)}
+      />
     </section>
   )
 }

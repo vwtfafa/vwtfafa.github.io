@@ -6,6 +6,7 @@ const SHOW_AFTER = 400
 export default function BackToTop() {
   const { t } = useLanguage()
   const [visible, setVisible] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     let ticking = false
@@ -14,12 +15,23 @@ export default function BackToTop() {
       ticking = true
       requestAnimationFrame(() => {
         ticking = false
+        const scrollHeight =
+          document.documentElement.scrollHeight - window.innerHeight
+        const pct =
+          scrollHeight > 0
+            ? Math.min(100, Math.max(0, (window.scrollY / scrollHeight) * 100))
+            : 0
+        setProgress(pct)
         setVisible(window.scrollY > SHOW_AFTER)
       })
     }
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
+    window.addEventListener("resize", onScroll)
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+    }
   }, [])
 
   const scrollTop = () => {
@@ -30,14 +42,22 @@ export default function BackToTop() {
   }
 
   return (
-    <button
-      className={`back-to-top${visible ? " back-to-top-visible" : ""}`}
-      onClick={scrollTop}
-      aria-label={t("backToTop.label")}
-      title={t("backToTop.label")}
-      tabIndex={visible ? 0 : -1}
-    >
-      ↑
-    </button>
+    <>
+      <div className="scroll-progress" aria-hidden="true">
+        <div
+          className="scroll-progress-bar"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+      <button
+        className={`back-to-top${visible ? " back-to-top-visible" : ""}`}
+        onClick={scrollTop}
+        aria-label={t("backToTop.label")}
+        title={t("backToTop.label")}
+        tabIndex={visible ? 0 : -1}
+      >
+        ↑
+      </button>
+    </>
   )
 }

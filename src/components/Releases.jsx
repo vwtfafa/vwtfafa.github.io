@@ -36,7 +36,7 @@ export default function Releases() {
               {release.icon ? (
                 <img
                   src={release.icon}
-                  alt=""
+                  alt={release.name}
                   className="release-icon"
                   loading="lazy"
                 />

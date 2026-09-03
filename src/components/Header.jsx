@@ -8,30 +8,55 @@ const NAV_IDS = Object.keys(translations.de.nav)
 const LOGO_CLICKS_NEEDED = 5
 
 export default function Header() {
-  const { lang, toggleLang } = useLanguage()
   const { theme, toggleTheme } = useTheme()
+  const { lang, toggleLang } = useLanguage()
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <header className="header">
+      <a
+        href="#main"
+        className="skip-link"
+        aria-label="Skip to main content"
+      >
+        Skip to main content
+      </a>
       <Logo />
-      <nav className="nav">
-        <NavLinks />
-        <button
-          className="lang-toggle theme-toggle"
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-          title={theme === "dark" ? "Light Mode" : "Dark Mode"}
-        >
-          {theme === "dark" ? "☀️" : "🌙"}
-        </button>
-        <button
-          className="lang-toggle"
-          onClick={toggleLang}
-          aria-label="Toggle language"
-          title={lang === "de" ? "Switch to English" : "Zu Deutsch wechseln"}
-        >
-          {lang === "de" ? "🇩🇪 DE" : "🇬🇧 EN"}
-        </button>
+      <nav className="nav" role="navigation" aria-label="Main navigation">
+        <div className="nav-desktop">
+          <NavLinks onNavigate={() => {}} />
+        </div>
+        <div className="header-controls">
+          <button
+            className="lang-toggle"
+            onClick={toggleLang}
+            aria-label={lang === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
+            title={lang === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
+          >
+            {lang === "de" ? "EN" : "DE"}
+          </button>
+          <button
+            className="lang-toggle theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            title={theme === "dark" ? "Light Mode" : "Dark Mode"}
+          >
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
+          <button
+            className="hamburger"
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? "✕" : "☰"}
+          </button>
+        </div>
+        {mobileOpen && (
+          <div className="mobile-nav">
+            <NavLinks onNavigate={() => setMobileOpen(false)} />
+          </div>
+        )}
       </nav>
     </header>
   )
@@ -68,7 +93,7 @@ function Logo() {
   )
 }
 
-function NavLinks() {
+function NavLinks({ onNavigate }) {
   const { lang } = useLanguage()
   const activeId = useScrollSpy(NAV_IDS)
   return (
@@ -77,6 +102,7 @@ function NavLinks() {
         <a
           key={key}
           href={`#${key}`}
+          onClick={onNavigate}
           className={`nav-link${activeId === key ? " nav-link-active" : ""}`}
           aria-current={activeId === key ? "true" : undefined}
         >

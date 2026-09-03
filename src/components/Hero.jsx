@@ -71,6 +71,12 @@ export default function Hero() {
             alt="vwtfafa Minecraft Skin"
             className="skin-render"
             loading="eager"
+            fetchPriority="high"
+            onError={(e) => {
+              if (!e.currentTarget.src.endsWith("/icons/icon-192.png")) {
+                e.currentTarget.src = "/icons/icon-192.png"
+              }
+            }}
           />
           {party && (
             <div className="pixel-burst" aria-hidden="true">
