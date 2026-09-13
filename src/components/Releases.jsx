@@ -12,7 +12,7 @@ export default function Releases() {
     .map((p) => ({
       id: p.id,
       name: t(`projects.items.${p.id}.name`),
-      icon: modrinth.map[p.modrinthId].iconUrl,
+      icon: modrinth.map[p.modrinthId].iconUrl || p.iconSrc || null,
       version: modrinth.map[p.modrinthId].latestVersion,
       date: modrinth.map[p.modrinthId].latestDate,
       url: p.modrinth,

@@ -126,6 +126,14 @@ export default function Contact() {
         <p className="footer-text" style={{ marginTop: "0.5rem", fontSize: "0.78rem" }}>
           {t("footer.legal")}
         </p>
+        <nav className="footer-links" aria-label="Legal" style={{ marginTop: "0.75rem" }}>
+          <a
+            href={lang === "de" ? "/datenschutz.html" : "/privacy.html"}
+            className="footer-link"
+          >
+            {t("footer.privacy")}
+          </a>
+        </nav>
       </footer>
     </section>
   )

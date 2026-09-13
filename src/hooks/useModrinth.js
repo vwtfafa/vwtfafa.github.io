@@ -3,7 +3,7 @@ import { projects } from "../data/projects"
 
 const modrinthProjects = projects.filter((p) => p.modrinthId)
 
-const CACHE_KEY = 'modrinthCache'
+const CACHE_KEY = 'modrinthCache-v2'
 const CACHE_TTL = 60 * 60 * 1000 // 1 hour
 
 function getCached() {

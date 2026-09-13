@@ -1,12 +1,15 @@
-const CACHE = "vwtfafa-site-v1"
+const CACHE = "vwtfafa-site-v4"
 
 const CORE = [
   "/",
   "/index.html",
   "/404.html",
+  "/datenschutz.html",
+  "/privacy.html",
   "/manifest.webmanifest",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
+  "/icons/quicktrash.png",
   "/favicon.svg",
 ]
 

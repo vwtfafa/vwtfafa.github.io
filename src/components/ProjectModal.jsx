@@ -9,6 +9,7 @@ export default function ProjectModal({
 }) {
   const { t, lang } = useLanguage()
   const [copiedCmd, setCopiedCmd] = useState(null)
+  const [linkCopied, setLinkCopied] = useState(false)
 
   useEffect(() => {
     if (!project) return
@@ -22,7 +23,8 @@ export default function ProjectModal({
       document.body.style.overflow = previous
       window.removeEventListener("keydown", onKey)
     }
-  }, [project, onClose])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [project?.id])
 
   if (!project) return null
 
@@ -30,6 +32,7 @@ export default function ProjectModal({
   const name = t(`projects.items.${project.id}.name`)
   const desc = t(`projects.items.${project.id}.desc`)
   const gallery = live?.gallery ?? []
+  const compat = project.compat ?? null
 
   const copyCommand = async (cmd) => {
     const code = cmd.split(" – ")[0].split(" - ")[0].trim()
@@ -47,6 +50,22 @@ export default function ProjectModal({
     setTimeout(() => setCopiedCmd(null), 1500)
   }
 
+  const copyLink = async () => {
+    const url = `${window.location.origin}${window.location.pathname}#projekt/${project.id}`
+    try {
+      await navigator.clipboard.writeText(url)
+    } catch {
+      const el = document.createElement("textarea")
+      el.value = url
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand("copy")
+      document.body.removeChild(el)
+    }
+    setLinkCopied(true)
+    setTimeout(() => setLinkCopied(false), 1500)
+  }
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
@@ -61,9 +80,9 @@ export default function ProjectModal({
         </button>
 
         <div className="modal-head">
-          {(live?.iconUrl || gallery[0]?.url) && (
+          {(live?.iconUrl || project.iconSrc || gallery[0]?.url) && (
             <img
-              src={live?.iconUrl || gallery[0].url}
+              src={live?.iconUrl || project.iconSrc || gallery[0].url}
               alt={name}
               className="modal-icon"
               loading="lazy"
@@ -94,6 +113,32 @@ export default function ProjectModal({
             <span className="modal-stat">⭐ {ghStats.stars}</span>
           )}
         </div>
+
+        {compat && (
+          <div className="modal-section">
+            <h4 className="modal-section-title">
+              {t("projects.compatTitle")}
+            </h4>
+            <dl className="compat-list">
+              <div className="compat-row">
+                <dt>{t("projects.compatMc")}</dt>
+                <dd>{compat.mc?.join(" · ") || t("projects.compatNone")}</dd>
+              </div>
+              <div className="compat-row">
+                <dt>{t("projects.compatLoaders")}</dt>
+                <dd>{compat.loaders?.join(" · ") || t("projects.compatNone")}</dd>
+              </div>
+              <div className="compat-row">
+                <dt>{t("projects.compatJava")}</dt>
+                <dd>{compat.java ? `Java ${compat.java}+` : t("projects.compatNone")}</dd>
+              </div>
+              <div className="compat-row">
+                <dt>{t("projects.compatDeps")}</dt>
+                <dd>{compat.deps?.length > 0 ? compat.deps.join(", ") : t("projects.compatNoDeps")}</dd>
+              </div>
+            </dl>
+          </div>
+        )}
 
         {Array.isArray(commands) && commands.length > 0 && (
           <div className="modal-section">
@@ -174,6 +219,9 @@ export default function ProjectModal({
               {t("projects.links.github")} ↗
             </a>
           )}
+          <button className="project-link link-share" onClick={copyLink}>
+            {linkCopied ? t("projects.linkCopied") : `🔗 ${t("projects.share")}`}
+          </button>
         </div>
       </div>
     </div>

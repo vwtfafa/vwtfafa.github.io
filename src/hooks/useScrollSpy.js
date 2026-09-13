@@ -9,13 +9,16 @@ export function useScrollSpy(ids) {
     const update = () => {
       ticking = false
       const probe = window.scrollY + window.innerHeight * 0.35
-      let current = null
+      const found = []
       for (const id of ids) {
         const el = document.getElementById(id)
         if (!el) continue
-        if (el.getBoundingClientRect().top + window.scrollY <= probe) {
-          current = el.id
-        }
+        found.push({ id: el.id, top: el.getBoundingClientRect().top + window.scrollY })
+      }
+      found.sort((a, b) => a.top - b.top)
+      let current = null
+      for (const entry of found) {
+        if (entry.top <= probe) current = entry.id
       }
       setActiveId(current)
     }

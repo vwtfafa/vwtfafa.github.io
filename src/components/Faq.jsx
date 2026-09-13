@@ -23,7 +23,19 @@ export default function Faq() {
                 <span className="faq-chevron">{open === i ? "▾" : "▸"}</span>
                 {item.q}
               </button>
-              {open === i && <p className="faq-answer">{item.a}</p>}
+              {open === i && (
+                <p className="faq-answer">
+                  {item.a}
+                  {item.link && item.linkText && (
+                    <>
+                      {" "}
+                      <a href={item.link} className="project-link link-modrinth">
+                        {item.linkText} →
+                      </a>
+                    </>
+                  )}
+                </p>
+              )}
             </div>
           </Reveal>
         ))}

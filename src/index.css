@@ -537,6 +537,7 @@ main {
 }
 
 .project-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: var(--bg-card);
@@ -741,8 +742,10 @@ main {
 }
 
 .discontinued-badge {
+  position: absolute;
+  top: -0.75rem;
+  right: 1rem;
   display: inline-block;
-  align-self: flex-start;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -752,12 +755,13 @@ main {
   border: 1px solid rgba(239, 68, 68, 0.45);
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
-  margin-bottom: 1rem;
 }
 
 .new-badge {
+  position: absolute;
+  top: -0.75rem;
+  right: 1rem;
   display: inline-block;
-  align-self: flex-start;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -767,7 +771,6 @@ main {
   box-shadow: 0 0 16px var(--green-glow);
   padding: 0.3rem 0.6rem;
   border-radius: 4px;
-  margin-bottom: 1rem;
 }
 
 /* ---------- Metrics ---------- */
@@ -2007,6 +2010,296 @@ main {
   color: var(--text-muted);
   font-size: 0.9rem;
   line-height: 1.6;
+}
+
+/* ---------- Projects toolbar (search + sort) ---------- */
+.projects-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.projects-search {
+  flex: 1 1 240px;
+  max-width: 340px;
+  font-family: var(--body-font);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  padding: 0.55rem 0.85rem;
+  border-radius: 6px;
+}
+
+.projects-search::placeholder {
+  color: var(--text-muted);
+}
+
+.projects-search:focus {
+  outline: 2px solid var(--green);
+  border-color: var(--green);
+}
+
+.projects-sort {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.projects-sort-select {
+  font-family: var(--body-font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.projects-count {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.projects-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--border-hover);
+}
+
+.projects-empty p {
+  margin-bottom: 1rem;
+}
+
+/* ---------- Compat badges ---------- */
+.project-compat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.compat-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(143, 163, 150, 0.08);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.compat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.compat-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.88rem;
+  padding: 0.45rem 0.65rem;
+  background: rgba(143, 163, 150, 0.06);
+  border: 1px solid var(--border);
+}
+
+.compat-row dt {
+  color: var(--text-muted);
+}
+
+.compat-row dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+}
+
+.link-share {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--border-hover);
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.link-share:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+/* ---------- Roadmap ---------- */
+.roadmap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+  position: relative;
+}
+
+.roadmap::before {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin: 0 auto 2.5rem;
+  background: var(--green);
+  box-shadow: 3px 3px 0 rgba(74, 222, 91, 0.25);
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.roadmap-grid > .reveal {
+  display: flex;
+}
+
+.roadmap-grid > .reveal > .roadmap-card {
+  flex: 1;
+}
+
+.roadmap-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.roadmap-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.roadmap-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.roadmap-status {
+  color: var(--green);
+}
+
+.roadmap-done .roadmap-status {
+  color: var(--text-muted);
+}
+
+.roadmap-target {
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.roadmap-title {
+  font-family: var(--pixel-font);
+  font-size: 1rem;
+}
+
+.roadmap-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.roadmap-project {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--green);
+  text-decoration: none;
+}
+
+.roadmap-project:hover {
+  opacity: 0.75;
+}
+
+/* ---------- Showcase testimonials ---------- */
+.showcase-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.showcase-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--green);
+  border: 1px solid rgba(74, 222, 91, 0.25);
+  background: rgba(74, 222, 91, 0.08);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.showcase-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.showcase-link:hover {
+  color: var(--green);
+}
+
+.showcase-cta {
+  border-style: dashed;
+  border-color: var(--border-hover);
+}
+
+.showcase-cta-title {
+  font-family: var(--pixel-font);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.showcase-cta-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+  .projects-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .projects-search {
+    max-width: none;
+  }
+  .projects-sort {
+    justify-content: space-between;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

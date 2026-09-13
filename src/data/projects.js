@@ -3,11 +3,17 @@ export const projects = [
     id: "lockend",
     modrinthId: "lock-end",
     icon: "🔒",
-    tags: ["Paper", "Bukkit", "Folia", "Utility"],
+    tags: ["Paper", "Purpur", "Utility"],
     modrinth: "https://modrinth.com/plugin/lock-end",
     github: "https://github.com/vwtfafa/lock-end",
     downloads: "4.6K",
     bstats: { id: 32010, url: "https://bstats.org/plugin/bukkit/Lock%20End/32010" },
+    compat: {
+      mc: ["26.2"],
+      loaders: ["Paper", "Purpur"],
+      java: 25,
+      deps: [],
+    },
   },
   {
     id: "backpack",
@@ -21,6 +27,12 @@ export const projects = [
       id: 32528,
       url: "https://bstats.org/plugin/bukkit/simplebackpack/32528",
     },
+    compat: {
+      mc: ["26.2"],
+      loaders: ["Paper", "Spigot", "Bukkit", "Purpur"],
+      java: 25,
+      deps: [],
+    },
   },
   {
     id: "craftattack",
@@ -30,18 +42,32 @@ export const projects = [
     modrinth: "https://modrinth.com/modpack/craft-attck",
     github: null,
     downloads: "7.1K",
+    compat: {
+      mc: ["1.21"],
+      loaders: ["Fabric"],
+      java: 21,
+      deps: ["Fabric Loader", "Fabric API"],
+    },
   },
   {
     id: "quicktrash",
+    modrinthId: "quick-trash",
     icon: "🗑️",
-    tags: ["Java", "Utility"],
-    modrinth: null,
+    iconSrc: "/icons/quicktrash.png",
+    tags: ["Paper", "Purpur", "Utility"],
+    modrinth: "https://modrinth.com/plugin/quick-trash",
     github: "https://github.com/vwtfafa/QuickTrash",
     downloads: null,
     isNew: true,
     bstats: {
       id: 33565,
       url: "https://bstats.org/plugin/bukkit/QuickTrash/33565",
+    },
+    compat: {
+      mc: ["26.2"],
+      loaders: ["Paper", "Purpur"],
+      java: 25,
+      deps: [],
     },
   },
   {
@@ -53,6 +79,12 @@ export const projects = [
     github: "https://github.com/vwtfafa/CompassTrack",
     downloads: "615",
     discontinued: true,
+    compat: {
+      mc: ["1.20", "1.21"],
+      loaders: ["Paper", "Spigot", "Bukkit", "Purpur"],
+      java: 17,
+      deps: [],
+    },
   },
   {
     id: "hitborder",
@@ -66,6 +98,12 @@ export const projects = [
     bstats: {
       id: 29463,
       url: "https://bstats.org/plugin/bukkit/HitBorder/29463",
+    },
+    compat: {
+      mc: ["1.21"],
+      loaders: ["Paper"],
+      java: 21,
+      deps: [],
     },
   },
 ]

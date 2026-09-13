@@ -5,6 +5,7 @@ import Hero from "./components/Hero"
 import Stats from "./components/Stats"
 import About from "./components/About"
 import Projects from "./components/Projects"
+import Roadmap from "./components/Roadmap"
 import Showcase from "./components/Showcase"
 import Guides from "./components/Guides"
 import Releases from "./components/Releases"
@@ -38,6 +39,7 @@ export default function App() {
           <Stats />
           <About />
           <Projects />
+          <Roadmap />
           <Showcase />
           <Guides />
           <Releases />
